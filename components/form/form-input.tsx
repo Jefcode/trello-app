@@ -15,7 +15,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
     const { label, error, className, ...restProps } = props;
 
     return (
-      <div className='space-y-1'>
+      <div className='space-y-1 w-full'>
         {label && <Label htmlFor='title'>{label}</Label>}
         <Input
           ref={ref}
@@ -26,7 +26,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           )}
           {...restProps}
         />
-        <p className='text-xs text-rose-500'>{error?.message}</p>
+        {error && <p className='text-xs text-rose-500'>{error.message}</p>}
       </div>
     );
   }

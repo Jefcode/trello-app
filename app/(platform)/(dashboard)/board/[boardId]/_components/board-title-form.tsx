@@ -29,7 +29,7 @@ export const BoardTitleForm = ({ board }: BoardTitleFormProps) => {
   const { isPending, mutate: updateTitle } = useMutation({
     mutationFn: updateBoardById,
     onSuccess: () => {
-      revalidateBoardPath(`/boards/${board.id}`);
+      revalidateBoardPath(`/board/${board.id}`);
 
       disableEditing();
     },
