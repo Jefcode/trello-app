@@ -29,3 +29,7 @@ export const updateBoardById = async ({
     title,
   });
 };
+
+export const deleteBoardById = async (boardId: string) => {
+  await axiosInstance.delete(`/api/boards/${boardId}`);
+};
