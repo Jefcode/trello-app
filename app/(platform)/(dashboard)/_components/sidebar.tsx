@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { headingFont } from '@/constants/fonts';
 import { cn } from '@/lib/utils';
 
 export const Sidebar = () => {
@@ -30,8 +31,12 @@ export const Sidebar = () => {
         <AccordionItem value='default' className='border-none'>
           <AccordionTrigger className='flex items-center gap-x-2 p-1.5 text-neutral-700 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline data-[state=closed]:bg-sky-500/10 data-[state=closed]:text-sky-700'>
             <div className='flex items-center gap-x-2'>
-              <div className='h-7 w-7 relative bg-green-500 rounded-md'></div>
-              <span className='font-medium text-sm'>Default Workspace</span>
+              <div className='h-7 w-7 relative bg-gradient-to-b from-green-400/80 to-green-600 rounded-md text-neutral-700 flex items-center justify-center'>
+                <span>D</span>
+              </div>
+              <span className={cn('font-medium text-s', headingFont.className)}>
+                Default Workspace
+              </span>
             </div>
           </AccordionTrigger>
           <AccordionContent className='pt-1 text-neutral-700'>
