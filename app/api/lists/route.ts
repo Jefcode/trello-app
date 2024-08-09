@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 
 import { db } from '@/lib/db';
-import { ObjectId } from 'bson';
-import { revalidatePath } from 'next/cache';
 import { ApiError } from '../_utils/ApiError';
 import { withErrorHandling } from '../_utils/WithErrorHandling';
 
@@ -11,7 +9,7 @@ export const POST = withErrorHandling(async (req) => {
 
   const { boardId, title } = body;
 
-  if (!boardId || !title || !ObjectId.isValid(boardId)) {
+  if (!boardId || !title) {
     throw new ApiError('Missing required fields', 400);
   }
 
@@ -46,9 +44,6 @@ export const POST = withErrorHandling(async (req) => {
       order: newOrder,
     },
   });
-
-  // Revalidate path
-  revalidatePath(`/board/${boardId}`);
 
   return NextResponse.json({
     message: 'list created',

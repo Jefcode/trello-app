@@ -1,6 +1,6 @@
 'use client';
 
-import { revalidateBoardPath } from '@/actions/board';
+import { revalidateWorkspace } from '@/actions/board';
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -20,7 +20,7 @@ export const BoardOptions = ({ boardId }: { boardId: string }) => {
   const { mutate: deleteBoard, isPending } = useMutation({
     mutationFn: deleteBoardById,
     onSuccess: () => {
-      revalidateBoardPath('/workspace/boards');
+      revalidateWorkspace();
 
       router.replace('/workspace/boards');
     },

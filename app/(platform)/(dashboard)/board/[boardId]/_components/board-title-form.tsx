@@ -4,7 +4,7 @@ import { Board } from '@prisma/client';
 import { useState } from 'react';
 import { z } from 'zod';
 
-import { revalidateBoardPath } from '@/actions/board';
+import { revalidateBoard } from '@/actions/board';
 import { FormInput } from '@/components/form/form-input';
 import { Button } from '@/components/ui/button';
 import { updateBoardById } from '@/services/boardService';
@@ -29,7 +29,7 @@ export const BoardTitleForm = ({ board }: BoardTitleFormProps) => {
   const { isPending, mutate: updateTitle } = useMutation({
     mutationFn: updateBoardById,
     onSuccess: () => {
-      revalidateBoardPath(`/board/${board.id}`);
+      revalidateBoard(board.id);
 
       disableEditing();
     },

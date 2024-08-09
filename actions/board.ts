@@ -1,15 +1,10 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { ObjectId } from 'bson';
 import { revalidatePath } from 'next/cache';
 
 export const getBoardById = async (boardId: string) => {
-  if (!ObjectId.isValid(boardId)) {
-    return null;
-  }
-
-  const board = await db.board.findFirst({
+  const board = await db.board.findUnique({
     where: {
       id: boardId,
     },
@@ -18,6 +13,10 @@ export const getBoardById = async (boardId: string) => {
   return board;
 };
 
-export const revalidateBoardPath = (path: string) => {
-  revalidatePath(path);
+export const revalidateBoard = (boardId: string) => {
+  revalidatePath(`/board/${boardId}`);
+};
+
+export const revalidateWorkspace = () => {
+  revalidatePath('/workspace/boards');
 };

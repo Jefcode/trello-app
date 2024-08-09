@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { useEventListener, useOnClickOutside } from 'usehooks-ts';
 import { z } from 'zod';
 
-import { revalidateBoardPath } from '@/actions/board';
+import { revalidateBoard } from '@/actions/board';
 import { FormInput } from '@/components/form/form-input';
 import { SubmitButton } from '@/components/form/submit-button';
 import { Button } from '@/components/ui/button';
@@ -25,9 +25,10 @@ type CreateListType = z.infer<typeof CreateListSchama>;
 
 export const ListForm = () => {
   const params = useParams();
+  const boardId = params.boardId as string;
   const router = useRouter();
-  const formRef = useRef<ElementRef<'form'>>(null);
 
+  const formRef = useRef<ElementRef<'form'>>(null);
   const [isEditing, setIsEditing] = useState(false);
 
   // Hook Form
@@ -45,13 +46,14 @@ export const ListForm = () => {
   const { isPending, mutate: createListMutate } = useMutation({
     mutationFn: createList,
     onSuccess: (data) => {
-      revalidateBoardPath(`/board/${params.boardId}`);
       toast.success(`List "${data.list.title}" created successfully`);
 
       disableEditing();
 
       // reset form
       reset();
+
+      revalidateBoard(boardId);
 
       router.refresh();
     },

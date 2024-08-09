@@ -7,6 +7,7 @@ import { ElementRef, PropsWithChildren, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { revalidateWorkspace } from '@/actions/board';
 import { Button } from '@/components/ui/button';
 import {
   Popover,
@@ -67,7 +68,11 @@ export const FormPopover = ({
 
       // Close the popover
       closeRef.current?.click();
-      router.push(`/board/${data.board.id}`);
+
+      // Revalidate this path
+      revalidateWorkspace();
+
+      // Pathrouter.push(`/board/${data.board.id}`);
     },
   });
 
