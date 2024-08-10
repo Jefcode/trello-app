@@ -10,6 +10,7 @@ const schema = z.object({
       id: z.string(),
       title: z.string(),
       order: z.number(),
+      listId: z.string(),
       createdAt: z.string(),
       updatedAt: z.string(),
     })
@@ -26,26 +27,27 @@ export const PATCH = withErrorHandling(async (req, params) => {
   try {
     body = schema.parse(bodyRaw);
   } catch (error) {
-    throw new ApiError('items is not an array of lists');
+    throw new ApiError('items is not an array of cards', 400);
   }
 
   const { items } = body;
 
-  const transaction = items.map((list) =>
-    db.list.update({
+  const transaction = items.map((card) =>
+    db.card.update({
       where: {
-        id: list.id,
+        id: card.id,
       },
       data: {
-        order: list.order,
+        order: card.order,
+        listId: card.listId,
       },
     })
   );
 
-  const lists = await db.$transaction(transaction);
+  const cards = await db.$transaction(transaction);
 
   return NextResponse.json({
-    message: 'Lists reordered',
-    lists,
+    message: 'cards reordered',
+    cards,
   });
 });

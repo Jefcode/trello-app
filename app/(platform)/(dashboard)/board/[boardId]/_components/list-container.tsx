@@ -1,13 +1,15 @@
 'use client';
 
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 import { revalidateBoard } from '@/actions/board';
+import { cardsReorder } from '@/services/cardService';
 import { listReorder } from '@/services/listService';
 import { ListWithCards } from '@/types';
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'sonner';
+
 import { ListForm } from './list-form';
 import { ListItem } from './list-item';
 
@@ -38,6 +40,18 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
     mutationFn: listReorder,
     onSuccess(data) {
       toast.success('Lists has been re-ordered');
+
+      revalidateBoard(boardId);
+    },
+  });
+
+  /**
+   * Mutation => reorder cards
+   */
+  const reorderCardsMutation = useMutation({
+    mutationFn: cardsReorder,
+    onSuccess() {
+      toast.success('cards has been re-ordered');
 
       revalidateBoard(boardId);
     },
@@ -103,6 +117,7 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
 
         sourceList.cards = reorderedCards;
         setOrderedData(newOrderedData);
+        reorderCardsMutation.mutate(reorderedCards);
       } else {
         // User moves the card to another list
         // Remove card from the source list
@@ -124,6 +139,7 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
         });
 
         setOrderedData(newOrderedData);
+        reorderCardsMutation.mutate(destList.cards);
       }
     }
   };
