@@ -32,7 +32,12 @@ export const updateListById = async ({
   return response.data;
 };
 
-
 export const deleteListById = async (listId: string) => {
   await axiosInstance.delete(`/api/lists/${listId}`);
+};
+
+export const copyListById = async (listId: string) => {
+  const response = await axiosInstance.post(`/api/lists/${listId}/copy`);
+
+  return response.data;
 };

@@ -2,7 +2,7 @@ import { revalidateBoard } from '@/actions/board';
 import { useDropdown } from '@/components/Dropdown';
 import { SubmitButton } from '@/components/form/submit-button';
 import { Separator } from '@/components/ui/separator';
-import { deleteListById } from '@/services/listService';
+import { copyListById, deleteListById } from '@/services/listService';
 import { List } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -21,8 +21,22 @@ export const ListOptionsActions = ({ listData }: ListOptionsActionsProps) => {
     mutationFn: deleteListById,
     onSuccess: () => {
       toast.success(`list "${listData.title}" was deleted`);
+      revalidateBoard(listData.boardId);
 
-      console.log(listData.boardId);
+      closeDropdown();
+    },
+  });
+
+  /**
+   * Copy list mutation
+   */
+  const copyListMutation = useMutation({
+    mutationFn: copyListById,
+    onSuccess: (data) => {
+      const newListTitle = data.newList.title;
+
+      toast.success(`list "${newListTitle}" was copied`);
+
       revalidateBoard(listData.boardId);
 
       closeDropdown();
@@ -32,7 +46,9 @@ export const ListOptionsActions = ({ listData }: ListOptionsActionsProps) => {
   return (
     <>
       <SubmitButton
+        onClick={() => copyListMutation.mutate(listData.id)}
         className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm'
+        loading={copyListMutation.isPending}
         variant='ghost'
       >
         Copy list

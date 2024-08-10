@@ -32,9 +32,8 @@ model Board {
 model List {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  title       String
-  order       Int
-  description String? @db.String
+  title String
+  order Int
 
   boardId String @db.ObjectId
   board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
@@ -50,8 +49,9 @@ model List {
 model Card {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  title String
-  order Int
+  title       String
+  order       Int
+  description String? @db.String
 
   listId String @db.ObjectId
   list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
