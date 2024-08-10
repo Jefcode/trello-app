@@ -75,6 +75,11 @@ export const ListHeader = ({ listData }: ListHeaderProps) => {
   useEventListener('keydown', onKeydown);
 
   const onSubmit = (data: FormType) => {
+    if (data.title === listData.title) {
+      disableEditing();
+      return;
+    }
+
     updateListMutate({
       title: data.title,
       id: listData.id,
@@ -102,7 +107,7 @@ export const ListHeader = ({ listData }: ListHeaderProps) => {
         </form>
       ) : (
         <div
-          className='w-full text-sm px-2 5 py-1 h-7 font-medium border-transparent cursor-pointer'
+          className='w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent cursor-pointer'
           onClick={enableEditing}
         >
           {title}
