@@ -3,7 +3,11 @@
 import { DragDropContext, Droppable, DropResult } from '@hello-pangea/dnd';
 import { useEffect, useState } from 'react';
 
+import { revalidateBoard } from '@/actions/board';
+import { listReorder } from '@/services/listService';
 import { ListWithCards } from '@/types';
+import { useMutation } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { ListForm } from './list-form';
 import { ListItem } from './list-item';
 
@@ -27,6 +31,18 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
     setOrderedData(data);
   }, [data]);
 
+  /**
+   * Mutation => reorder list
+   */
+  const reorderListsMutation = useMutation({
+    mutationFn: listReorder,
+    onSuccess(data) {
+      toast.success('Lists has been re-ordered');
+
+      revalidateBoard(boardId);
+    },
+  });
+
   const onDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
 
@@ -46,6 +62,7 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
       );
 
       setOrderedData(items);
+      reorderListsMutation.mutate(items);
     }
 
     // if user moves a card
