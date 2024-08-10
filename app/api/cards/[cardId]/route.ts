@@ -56,3 +56,17 @@ export const PATCH = withErrorHandling<Params>(async (req, { params }) => {
     card: updatedCard,
   });
 });
+
+export const DELETE = withErrorHandling<Params>(async (req, { params }) => {
+  const cardId = params.cardId;
+
+  await db.card.delete({
+    where: {
+      id: cardId,
+    },
+  });
+
+  return NextResponse.json({
+    message: 'Deleted',
+  });
+});

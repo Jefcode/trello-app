@@ -11,6 +11,7 @@ import { SubmitButton } from '../form/submit-button';
 import { Spinner } from '../spinner';
 import { CardModalHeader } from './card-modal-header';
 import { CardModalForm } from './card-modal-form';
+import { CardModalActions } from './card-modal-actions';
 
 interface CardModalDetail {
   cardId: string;
@@ -57,7 +58,7 @@ export const CardModalDetail = ({ cardId }: CardModalDetail) => {
             <div className='space-y-1 w-full'>
               <h3 className='font-semibold mb-3 text-left'>Description</h3>
 
-              <CardModalForm card={card} /> 
+              <CardModalForm card={card} />
             </div>
           </div>
         </div>
@@ -69,28 +70,7 @@ export const CardModalDetail = ({ cardId }: CardModalDetail) => {
           </p>
 
           {/* Actions */}
-          <div className='flex w-full md:flex-col gap-y-1 gap-x-2 text-neutral-700 text-sm'>
-            <SubmitButton
-              className='py-1.5 px-2 bg-neutral-100 hover:bg-neutral-100 border border-neutral-300 md:border-transparent hover:border-neutral-700 rounded-none flex-1'
-              variant='ghost'
-              size='sm'
-            >
-              <div className='text-left flex items-center gap-2'>
-                <Copy className='w-4 h-4' />
-                <span className='font-medium text-sm'>Copy</span>
-              </div>
-            </SubmitButton>
-            <SubmitButton
-              className='py-1.5 px-2 bg-neutral-100 hover:bg-neutral-100 border border-neutral-300 md:border-transparent hover:border-neutral-700 rounded-none flex-1'
-              variant='ghost'
-              size='sm'
-            >
-              <div className='text-left flex items-center gap-2'>
-                <Trash className='w-4 h-4' />
-                <span>Delete</span>
-              </div>
-            </SubmitButton>
-          </div>
+          <CardModalActions cardId={card.id} />
         </div>
       </div>
     </>

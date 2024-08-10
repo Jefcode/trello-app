@@ -52,3 +52,13 @@ export const updateCardById = async ({
 
   return response.data;
 };
+
+export const deleteCardById = async (cardId: string) => {
+  await axiosInstance.delete(`/api/cards/${cardId}`);
+};
+
+export const copyCardById = async (cardId: string) => {
+  const response = await axiosInstance.post(`/api/cards/${cardId}/copy`);
+
+  return response.data;
+};

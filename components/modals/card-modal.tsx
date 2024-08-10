@@ -1,6 +1,6 @@
 'use client';
 
-import { PropsWithChildren } from 'react';
+import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
 import {
   Dialog,
@@ -10,19 +10,37 @@ import {
 } from '@/components/ui/dialog';
 import { CardModalDetail } from './card-modal-details';
 
+const CardModalContext = createContext(
+  {} as {
+    close: () => void;
+  }
+);
+
 export const CardDetailsModal = ({
   children,
   cardId,
 }: PropsWithChildren<{ cardId: string }>) => {
-  return (
-    <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent className='w-[700px] max-w-[calc(100vw-50px)]'>
-        {/* For screen readers */}
-        <DialogTitle className='hidden' >Card Description</DialogTitle>
+  const [open, setOpen] = useState(false);
 
-        <CardModalDetail cardId={cardId} />
-      </DialogContent>
-    </Dialog>
+  const onClose = () => setOpen(false);
+
+  return (
+    <CardModalContext.Provider
+      value={{
+        close: onClose,
+      }}
+    >
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger>{children}</DialogTrigger>
+        <DialogContent className='w-[700px] max-w-[calc(100vw-50px)]'>
+          {/* For screen readers */}
+          <DialogTitle className='hidden'>Card Description</DialogTitle>
+
+          <CardModalDetail cardId={cardId} />
+        </DialogContent>
+      </Dialog>
+    </CardModalContext.Provider>
   );
 };
+
+export const useCardModal = () => useContext(CardModalContext);
