@@ -42,6 +42,8 @@ export const AddCard = ({ listData }: { listData: List }) => {
       revalidateBoard(listData.boardId);
 
       reset();
+
+      setFocus('title');
     },
   });
 
@@ -83,7 +85,6 @@ export const AddCard = ({ listData }: { listData: List }) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormTextarea
-          disabled={createCardMutation.isPending}
           onKeyDown={onTextareaKeyDown}
           placeholder='Enter a title for this card...'
           {...register('title')}
