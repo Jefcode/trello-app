@@ -26,7 +26,9 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           )}
           {...restProps}
         />
-        {error && <p className='text-xs text-rose-500'>{error.message}</p>}
+        {error && (
+          <p className='text-xs text-rose-500 font-normal'>{error.message}</p>
+        )}
       </div>
     );
   }

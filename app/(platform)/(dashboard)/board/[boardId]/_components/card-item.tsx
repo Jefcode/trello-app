@@ -1,6 +1,6 @@
 'use client';
 
-import { CardDetailsModal } from '@/components/modals/CardDetailsModal';
+import { CardDetailsModal } from '@/components/modals/card-modal';
 import { Draggable } from '@hello-pangea/dnd';
 import { Card } from '@prisma/client';
 
@@ -14,7 +14,7 @@ export const CardItem = ({ index, card }: CardItemProps) => {
     <Draggable draggableId={card.id} index={index}>
       {(provided) => (
         <>
-          <CardDetailsModal>
+          <CardDetailsModal cardId={card.id}>
             <div
               {...provided.dragHandleProps}
               {...provided.draggableProps}

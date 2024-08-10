@@ -1,4 +1,5 @@
 import { axiosInstance } from '@/lib/axios';
+import { CardWithList } from '@/types';
 import { Card } from '@prisma/client';
 
 /**
@@ -22,6 +23,31 @@ export const createCard = async ({
 export const cardsReorder = async (items: Card[]) => {
   const response = await axiosInstance.patch('/api/cards/reorder', {
     items,
+  });
+
+  return response.data;
+};
+
+export const getCardById = async (
+  cardId: string
+): Promise<{ card: CardWithList }> => {
+  const response = await axiosInstance.get(`/api/cards/${cardId}`);
+
+  return response.data;
+};
+
+export const updateCardById = async ({
+  cardId,
+  title,
+  description,
+}: {
+  cardId: string;
+  title: string;
+  description: string;
+}) => {
+  const response = await axiosInstance.patch(`/api/cards/${cardId}`, {
+    title,
+    description,
   });
 
   return response.data;
