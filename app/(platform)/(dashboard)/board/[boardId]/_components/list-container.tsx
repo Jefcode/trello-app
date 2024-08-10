@@ -10,6 +10,7 @@ import { cardsReorder } from '@/services/cardService';
 import { listReorder } from '@/services/listService';
 import { ListWithCards } from '@/types';
 
+import { AnimatePresence } from 'framer-motion';
 import { ListForm } from './list-form';
 import { ListItem } from './list-item';
 
@@ -151,11 +152,13 @@ export const ListContainer = ({ boardId, data }: ListContainerProps) => {
           <ol
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className='flex h-full gap-3'
+            className='flex h-full'
           >
-            {orderedData.map((list, index) => (
-              <ListItem key={list.id} index={index} data={list} />
-            ))}
+            <AnimatePresence>
+              {orderedData.map((list, index) => (
+                <ListItem key={list.id} index={index} data={list} />
+              ))}
+            </AnimatePresence>
 
             {provided.placeholder}
 
