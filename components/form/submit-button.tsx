@@ -16,13 +16,13 @@ export const SubmitButton = (props: SubmitButtonProps) => {
   } = props;
 
   return (
-    <fieldset disabled={loading} className='group'>
+    <fieldset disabled={loading} className='group w-full'>
       <Button
         className={cn('w-full relative', className)}
         variant={variant}
         {...restProps}
       >
-        <span className='group-disabled:opacity-0'>{children}</span>
+        <div className='group-disabled:opacity-0 w-full'>{children}</div>
         <div className=' absolute inset-0 flex items-center justify-center'>
           <Spinner className='group-enabled:opacity-0 w-5 h-5' />
         </div>
