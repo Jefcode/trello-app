@@ -11,7 +11,7 @@ export const Navbar = () => {
 
         <div className='space-x-4 md:block md:w-auto flex items-center justify-between w-full'>
           <Button size='sm' asChild>
-            <Link href='/workspace'>Get trello for free</Link>
+            <Link href='/workspace/boards'>Get trello for free</Link>
           </Button>
         </div>
       </div>

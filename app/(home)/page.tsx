@@ -49,7 +49,7 @@ const MarketingPage = () => {
       </div>
 
       <Button className='mt-6' size='lg' asChild>
-        <Link href='/workspace'>Get Trello for free</Link>
+        <Link href='/workspace/boards'>Get Trello for free</Link>
       </Button>
     </div>
   );

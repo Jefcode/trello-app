@@ -50,7 +50,7 @@ export const Sidebar = () => {
             >
               <Link
                 href='/workspace/boards'
-                className='flex items-center gap-2'
+                className='flex items-center gap-2 w-full'
               >
                 <Layout className='w-4 h-4' />
                 <span>Boards</span>
@@ -68,7 +68,7 @@ export const Sidebar = () => {
             >
               <Link
                 href='/workspace/activity'
-                className='flex items-center gap-2'
+                className='flex items-center gap-2 w-full'
               >
                 <Activity className='w-4 h-4' />
                 <span>Activity</span>
@@ -86,7 +86,7 @@ export const Sidebar = () => {
             >
               <Link
                 href='/workspace/settings'
-                className='flex items-center gap-2'
+                className='flex items-center gap-2 w-full'
               >
                 <Settings className='w-4 h-4' />
                 <span>Settings</span>
