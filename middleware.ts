@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 const isPublicRoute = createRouteMatcher(['/']);
-const isProtectedRoute = createRouteMatcher(['/organization(.*)']);
+const isProtectedRoute = createRouteMatcher(['/workspace(.*)', '/board(.*)']);
 
 export default clerkMiddleware((auth, req) => {
   const user = auth();
@@ -10,7 +10,7 @@ export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) auth().protect();
 
   if (user.userId && isPublicRoute(req)) {
-    const redirectTo = new URL('/workspace', req.url);
+    const redirectTo = new URL('/workspace/boards', req.url);
     return NextResponse.redirect(redirectTo);
   }
 });

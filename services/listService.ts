@@ -17,3 +17,22 @@ export const createList = async ({
 
   return response.data;
 };
+
+export const updateListById = async ({
+  id,
+  title,
+}: {
+  id: string;
+  title: string;
+}) => {
+  const response = await axiosInstance.patch(`/api/lists/${id}`, {
+    title,
+  });
+
+  return response.data;
+};
+
+
+export const deleteListById = async (listId: string) => {
+  await axiosInstance.delete(`/api/lists/${listId}`);
+};
