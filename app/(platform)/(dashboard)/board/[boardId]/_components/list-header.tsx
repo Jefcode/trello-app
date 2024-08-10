@@ -14,6 +14,7 @@ import { FormInput } from '@/components/form/form-input';
 import { titleSchema } from '@/schemas';
 import { updateListById } from '@/services/listService';
 import { List } from '@prisma/client';
+import { ListOptions } from './list-options';
 
 interface ListHeaderProps {
   listData: List;
@@ -107,6 +108,8 @@ export const ListHeader = ({ listData }: ListHeaderProps) => {
           {title}
         </div>
       )}
+
+      <ListOptions listData={listData} onAddCard={() => {}} />
     </div>
   );
 };
