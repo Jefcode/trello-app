@@ -3,6 +3,8 @@
 import { ListWithCards } from '@/types';
 import { AddCard } from './add-card';
 import { ListHeader } from './list-header';
+import { cn } from '@/lib/utils';
+import { CardItem } from './card-item';
 
 interface ListItemProps {
   index: number;
@@ -14,6 +16,17 @@ export const ListItem = ({ data, index }: ListItemProps) => {
     <li className='shrink-0 h-full w-[272px] select-none'>
       <div className='w-full rounded-md bg-[#f1f2f4] shadow-md pb-2'>
         <ListHeader listData={data} />
+
+        <ol
+          className={cn(
+            'mx-1 px-1 py-0.5 flex flex-col gap-y-2',
+            data.cards.length > 0 ? 'mt-2' : 'mt-0'
+          )}
+        >
+          {data.cards.map((card, index) => (
+            <CardItem key={card.id} index={index} card={card} />
+          ))}
+        </ol>
 
         <AddCard listData={data} />
       </div>
