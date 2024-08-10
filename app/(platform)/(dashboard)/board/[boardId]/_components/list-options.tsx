@@ -22,14 +22,6 @@ export const ListOptions = ({ listData, onAddCard }: ListOptionsProps) => {
       </Dropdown.Button>
 
       <Dropdown.Content title='List actions'>
-        <Button
-          onClick={onAddCard}
-          className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm'
-          variant='ghost'
-        >
-          Add card
-        </Button>
-
         {/* Copy | Delete Actions */}
         <ListOptionsActions listData={listData} />
       </Dropdown.Content>

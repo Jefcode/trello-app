@@ -10,6 +10,7 @@ import FormTextarea from '../form/form-textarea';
 import { SubmitButton } from '../form/submit-button';
 import { Spinner } from '../spinner';
 import { CardModalHeader } from './card-modal-header';
+import { CardModalForm } from './card-modal-form';
 
 interface CardModalDetail {
   cardId: string;
@@ -56,12 +57,7 @@ export const CardModalDetail = ({ cardId }: CardModalDetail) => {
             <div className='space-y-1 w-full'>
               <h3 className='font-semibold mb-3 text-left'>Description</h3>
 
-              <form>
-                <FormTextarea
-                  className='w-full bg-neutral-100 rounded-none border-none h-20'
-                  placeholder='Add a description here'
-                />
-              </form>
+              <CardModalForm card={card} /> 
             </div>
           </div>
         </div>

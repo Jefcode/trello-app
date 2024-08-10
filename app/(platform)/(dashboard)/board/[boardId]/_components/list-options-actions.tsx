@@ -47,7 +47,7 @@ export const ListOptionsActions = ({ listData }: ListOptionsActionsProps) => {
     <>
       <SubmitButton
         onClick={() => copyListMutation.mutate(listData.id)}
-        className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm'
+        className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm text-left'
         loading={copyListMutation.isPending}
         variant='ghost'
       >
@@ -58,7 +58,7 @@ export const ListOptionsActions = ({ listData }: ListOptionsActionsProps) => {
 
       <SubmitButton
         onClick={() => deleteMutation.mutate(listData.id)}
-        className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm'
+        className='rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm text-left'
         loading={deleteMutation.isPending}
         variant='ghost'
       >
