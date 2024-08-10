@@ -1,9 +1,8 @@
+import { FormPopover } from '@/components/form/form-popover';
 import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
-import { UserButton } from '@clerk/nextjs';
 import { Plus } from 'lucide-react';
 import { MobileSidebar } from './mobile-sidebar';
-import { FormPopover } from '@/components/form/form-popover';
 
 export const Navbar = () => {
   return (
@@ -28,18 +27,7 @@ export const Navbar = () => {
         </FormPopover>
       </div>
 
-      <div className='ml-auto flex items-center gap-x-2'>
-        <UserButton
-          appearance={{
-            elements: {
-              avatarBox: {
-                width: 23,
-                height: 23,
-              },
-            },
-          }}
-        />
-      </div>
+      <div className='ml-auto flex items-center gap-x-2'></div>
     </nav>
   );
 };
